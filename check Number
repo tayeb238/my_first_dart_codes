@@ -1,0 +1,14 @@
+void checkNumber(int inputNumber){
+  if (inputNumber % 2==0){
+    print("$inputNumber number is an even number");
+  }else{
+    print("$inputNumber number is an odd number");
+  }
+}
+void main(){
+  print("-----Testing our Function");
+  checkNumber(30);
+  checkNumber(399);
+  checkNumber(999);
+  checkNumber(0);
+}
