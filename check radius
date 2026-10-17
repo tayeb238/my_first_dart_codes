@@ -1,0 +1,21 @@
+double calculateCircleArea(double radius){
+  double pi = 3.1416;
+  double area = pi*radius*radius;
+  return area;
+}
+void main(){
+  print("----Testing Funtion With Return Keyword---");
+  for(int r=1; r<=6;r++){
+    double currentRadious=r.toDouble();
+    double circleArea=calculateCircleArea(currentRadious);
+    print("Radius:$r.0-> Area:$circleArea");
+  }
+  double area1 = calculateCircleArea(5.0);
+  double area2= calculateCircleArea(4.56);
+  double area3= calculateCircleArea(6.43);
+  print("The Area of the circle is :$area1");
+  print("The Area of the circle is :$area2");
+  print("The Area of the circle is :$area3");
+
+
+}
