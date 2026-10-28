@@ -1,0 +1,88 @@
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(const MyApp());
+}
+class MyApp extends 
+StatefulWidget {
+  const MyApp({super.key});
+  @override
+  State<MyApp>createState()=> _MyAppState();
+}
+class _MyAppState extends
+State<MyApp> {
+  int count=0;
+  void increaseCount(){
+    setState(() {
+      count++;
+    });
+  }
+  void resetCount(){
+    setState(() {
+      count=0;
+    });
+  }
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+      home: Scaffold(
+        backgroundColor: Colors.indigoAccent,
+        appBar: AppBar(
+          centerTitle: true,
+          backgroundColor: Colors.red,
+          title:const Text("Counter App",
+          style: TextStyle(
+            color: Colors.amber,
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+        ),
+        body:Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text("Count=$count",style:const TextStyle(fontSize: 30,),),
+              const SizedBox(height: 20),
+              ElevatedButton (
+                 style:ElevatedButton.styleFrom(
+                  backgroundColor: Colors.indigo,
+                  foregroundColor: Colors.white,
+                  padding:const
+                  EdgeInsets.symmetric(
+                    horizontal: 30,
+                    vertical: 20,
+                  ),
+                ),
+                onPressed: increaseCount,
+              child: const Text('increase',style:TextStyle(fontSize:20,
+               fontWeight:FontWeight.bold,
+               fontStyle:FontStyle.italic,
+               letterSpacing:2.0,),
+              ),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: 
+        ElevatedButton (
+          style: ElevatedButton.styleFrom(
+            backgroundColor: Colors.green,
+            foregroundColor: Colors.black,
+            padding: const
+            EdgeInsets.symmetric(
+              horizontal: 20,
+              vertical: 15,
+            ),
+          ),
+          onPressed: resetCount,
+        child: const Text('Reset',style:TextStyle(fontSize:20,
+               fontWeight:FontWeight.bold,
+               fontStyle:FontStyle.italic,
+               letterSpacing:2.0,),
+                ),
+        ),
+      ),
+    );
+  }
+}
