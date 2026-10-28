@@ -1,0 +1,156 @@
+import 'package:flutter/material.dart';
+void main(){
+  runApp(const StudentApp());
+}
+class StudentApp extends
+StatefulWidget {
+  const StudentApp({super.key});
+  @override
+  State<StudentApp>createState() =>_StudentAppState();
+}
+class _StudentAppState extends
+State<StudentApp>{
+  final nameController=TextEditingController();
+  final banglaController=TextEditingController();
+  final englishController=TextEditingController();
+  final mathController= TextEditingController();
+  String studentName="";
+  int total=0;
+  double average=0;
+  bool resultShown= false;
+  void calculateResult(){
+    int? bangla = int.tryParse(banglaController.text);
+    int? english= int.tryParse(englishController.text);
+    int? math= int.tryParse(mathController.text);
+    if(nameController.text.trim().isEmpty||
+    bangla == null ||
+    english == null ||
+    math == null ||
+    bangla < 0 ||
+    bangla > 100 ||
+    english < 0 ||
+    english > 100 ||
+    math < 0 ||
+    math > 100  ) {
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar
+      (content:Text("put your name & each subject number 1-100"),
+      ),
+      );
+      return;
+    }
+    setState(() {
+      studentName=nameController.text.trim();
+      total=bangla+english+math;
+      average=total/3;
+      resultShown=true;
+      });
+  }
+  @override
+  void dispose(){
+    nameController.dispose();
+    banglaController.dispose();
+    englishController.dispose();
+    mathController.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context){
+    return MaterialApp(
+     debugShowCheckedModeBanner:
+     false,
+     home:Scaffold(
+      appBar: AppBar(
+        title: const Text("Student Result App"),
+        centerTitle: true,
+        backgroundColor: Colors.indigo,
+        foregroundColor: Colors.white,
+      ),
+      body:SingleChildScrollView(padding:const
+      EdgeInsets.all(20),
+      child:  Column(
+        crossAxisAlignment:CrossAxisAlignment.stretch,
+        children:[
+          const Text("Student Result",
+          textAlign:TextAlign.center,
+          style:TextStyle(
+            fontSize: 25,
+            fontWeight: FontWeight.bold,
+          ),
+          ),
+          const SizedBox(height:25),
+           TextField(
+            controller: nameController,
+            decoration: InputDecoration(
+              labelText: "Student Name",
+              border: OutlineInputBorder(),
+              prefixIcon: Icon(Icons.person),
+            ),
+          ),
+          const SizedBox(height: 15),
+           TextField(
+            controller: banglaController,
+            keyboardType: TextInputType.number,
+            decoration: 
+            InputDecoration(
+              labelText: "Bangali Subject Number",
+              border:
+               OutlineInputBorder(),
+               prefixIcon: Icon(Icons.edit),
+            ),
+          ),
+          const SizedBox(height: 15),
+           TextField(
+            controller: englishController,
+            keyboardType: TextInputType.number,
+            decoration: 
+            InputDecoration(
+              labelText: "English Subject Number",
+              border:
+               OutlineInputBorder(),
+               prefixIcon: Icon(Icons.edit),
+            ),
+          ),
+          const SizedBox(height: 15),
+           TextField(
+            controller: mathController,
+            keyboardType: TextInputType.number,
+            decoration: 
+            InputDecoration(
+              labelText: "Math Subject Number",
+              border:
+               OutlineInputBorder(),
+            ),
+          ),
+          const SizedBox(height: 25),
+          ElevatedButton(onPressed:calculateResult,
+          style:ElevatedButton.styleFrom(
+            backgroundColor: Colors.indigo,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.all(15),
+          ),
+          child: const Text("Result",
+          style: TextStyle(fontSize: 18),
+          ),
+          ),
+          if (resultShown)...[const SizedBox(height: 25),
+          Card(child: Padding(padding: const EdgeInsets.all(16),
+          child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+          children: [const Text("Your result",
+          style: TextStyle(fontSize: 22,fontWeight: FontWeight.bold,),
+          ),
+          const SizedBox(height:12),Text("NAME=$studentName"),
+          Text("SUM OF NUMBER/300"),Text("AVERAGE OF NUMBER=${average.toStringAsFixed(2)}",
+          ),
+          ],
+          ),
+          ),
+          ),
+          ],
+        ],
+      ),
+        ),
+      
+     ),
+    );
+  }
+}
